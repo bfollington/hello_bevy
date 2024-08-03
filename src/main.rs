@@ -3,6 +3,7 @@ use leafwing_input_manager::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_scriptum::prelude::*;
 use bevy_scriptum::runtimes::lua::prelude::*;
+use avian3d::prelude::*;
 
 #[derive(Actionlike, PartialEq, Eq, Hash, Clone, Copy, Debug, Reflect)]
 enum InputAction {
@@ -20,10 +21,12 @@ fn main() {
        })
         .add_plugins(WorldInspectorPlugin::new())
         .add_plugins(InputManagerPlugin::<InputAction>::default())
+        .add_plugins(PhysicsPlugins::default())
         .add_systems(Startup, startup)
         .add_systems(Startup, spawn_player)
         .add_systems(Update, jump)
         .add_systems(Update, call_lua_on_update_from_rust)
+        .add_systems(Startup, setup_avian)
         .run();
 }
 
@@ -62,4 +65,50 @@ fn call_lua_on_update_from_rust(
             .call_fn("on_update", &mut script_data, entity, ())
             .unwrap();
     }
+}
+
+fn setup_avian(
+    mut commands: Commands,
+    mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<StandardMaterial>>,
+) {
+    // Static physics object with a collision shape
+    commands.spawn((
+        RigidBody::Static,
+        Collider::cylinder(4.0, 0.1),
+        PbrBundle {
+            mesh: meshes.add(Cylinder::new(4.0, 0.1)),
+            material: materials.add(Color::WHITE),
+            ..default()
+        },
+    ));
+
+    // Dynamic physics object with a collision shape and initial angular velocity
+    commands.spawn((
+        RigidBody::Dynamic,
+        Collider::cuboid(1.0, 1.0, 1.0),
+        AngularVelocity(Vec3::new(2.5, 3.5, 1.5)),
+        PbrBundle {
+            mesh: meshes.add(Cuboid::new(1.0, 1.0, 1.0)),
+            material: materials.add(Color::srgb_u8(124, 144, 255)),
+            transform: Transform::from_xyz(0.0, 4.0, 0.0),
+            ..default()
+        },
+    ));
+
+    // Light
+    commands.spawn(PointLightBundle {
+        point_light: PointLight {
+            shadows_enabled: true,
+            ..default()
+        },
+        transform: Transform::from_xyz(4.0, 8.0, 4.0),
+        ..default()
+    });
+
+    // Camera
+    commands.spawn(Camera3dBundle {
+        transform: Transform::from_xyz(-2.5, 4.5, 9.0).looking_at(Vec3::ZERO, Dir3::Y),
+        ..default()
+    });
 }
