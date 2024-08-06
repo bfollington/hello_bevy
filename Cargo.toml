@@ -10,12 +10,15 @@ avian2d = "0.1.1"
 avian3d = "0.1.1"
 bevy = { version = "0.14.1", features = ["file_watcher"] }
 bevy-inspector-egui = "0.25.1"
+bevy_asepritesheet = "0.6.0"
 bevy_console = "0.11.1"
 bevy_dev_console = "0.0.0"
 bevy_mod_scripting = "0.6.0"
 bevy_scriptum = { version = "0.6.0", features = ["lua"] }
 bevy_tween = "0.6.0"
 leafwing-input-manager = "0.14.0"
+leafwing_manifest = { version = "0.2.0", features = ["ron"] }
+serde = "1.0.204"
 
 # Enable a small amount of optimization in the dev profile.
 [profile.dev]

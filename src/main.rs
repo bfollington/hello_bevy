@@ -2,8 +2,6 @@ use bevy::prelude::*;
 use interpolate::scale;
 use leafwing_input_manager::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
-use bevy_scriptum::prelude::*;
-use bevy_scriptum::runtimes::lua::prelude::*;
 use avian3d::prelude::*;
 use bevy_tween::prelude::*;
 use bevy_tween::{
@@ -11,6 +9,7 @@ use bevy_tween::{
 };
 
 mod scripting;
+mod manifest;
 
 #[derive(Actionlike, PartialEq, Eq, Hash, Clone, Copy, Debug, Reflect)]
 enum InputAction {
@@ -32,6 +31,7 @@ fn main() {
         .add_systems(Startup, setup_tweens);
 
     scripting::setup(&mut app);
+    manifest::setup(&mut app);
 
     app.run();
 }

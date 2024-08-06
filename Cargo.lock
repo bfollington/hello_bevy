@@ -685,6 +685,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "bevy_asepritesheet"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6e4cf51f959625cfda24ab4810f487ca04ed8d9e81eabcdf26e89f6f56fac025"
+dependencies = [
+ "bevy 0.13.1",
+ "serde",
+ "serde_json",
+]
+
+[[package]]
 name = "bevy_asset"
 version = "0.13.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -775,6 +786,24 @@ dependencies = [
 
 [[package]]
 name = "bevy_audio"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b0f12495e230cd5cf59c6051cdd820c97d7fe4f0597d4d9c3240c62e9c65b485"
+dependencies = [
+ "bevy_app 0.13.2",
+ "bevy_asset 0.13.2",
+ "bevy_derive 0.13.2",
+ "bevy_ecs 0.13.2",
+ "bevy_math 0.13.2",
+ "bevy_reflect 0.13.2",
+ "bevy_transform 0.13.2",
+ "bevy_utils 0.13.2",
+ "cpal",
+ "rodio 0.17.3",
+]
+
+[[package]]
+name = "bevy_audio"
 version = "0.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e3050cb7244560313800b284e4b5eafcf91e833464e44d8407b20ec6c65974fc"
@@ -789,7 +818,7 @@ dependencies = [
  "bevy_transform 0.14.1",
  "bevy_utils 0.14.1",
  "cpal",
- "rodio",
+ "rodio 0.18.1",
 ]
 
 [[package]]
@@ -805,6 +834,19 @@ dependencies = [
  "serde",
  "thiserror",
  "wgpu-types 0.20.0",
+]
+
+[[package]]
+name = "bevy_common_assets"
+version = "0.11.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "6f631ce2863f3b6f1af3fa24143363b9fbd21c44218caad495a17b83e6968256"
+dependencies = [
+ "anyhow",
+ "bevy 0.14.1",
+ "ron",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -1125,6 +1167,22 @@ dependencies = [
 
 [[package]]
 name = "bevy_gilrs"
+version = "0.13.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7d133c65ab756f130c65cf00f37dc293fb9a9336c891802baf006c63e300d0e2"
+dependencies = [
+ "bevy_app 0.13.2",
+ "bevy_ecs 0.13.2",
+ "bevy_input 0.13.2",
+ "bevy_log 0.13.2",
+ "bevy_time 0.13.2",
+ "bevy_utils 0.13.2",
+ "gilrs",
+ "thiserror",
+]
+
+[[package]]
+name = "bevy_gilrs"
 version = "0.14.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a64d84c2cbc6a027ba2c293752f9508e6777607acb1d98d03c25eb2a80d55372"
@@ -1214,6 +1272,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "21ecf404295055deb7fe037495891bc135ca10d46bc5b6c55f9ab7b7ebc61d31"
 dependencies = [
  "base64 0.21.7",
+ "bevy_animation 0.13.2",
  "bevy_app 0.13.2",
  "bevy_asset 0.13.2",
  "bevy_core 0.13.2",
@@ -1336,11 +1395,13 @@ dependencies = [
  "bevy_animation 0.13.2",
  "bevy_app 0.13.2",
  "bevy_asset 0.13.2",
+ "bevy_audio 0.13.2",
  "bevy_core 0.13.2",
  "bevy_core_pipeline 0.13.2",
  "bevy_derive 0.13.2",
  "bevy_diagnostic 0.13.2",
  "bevy_ecs 0.13.2",
+ "bevy_gilrs 0.13.2",
  "bevy_gizmos 0.13.2",
  "bevy_gltf 0.13.2",
  "bevy_hierarchy 0.13.2",
@@ -1360,6 +1421,7 @@ dependencies = [
  "bevy_ui 0.13.2",
  "bevy_utils 0.13.2",
  "bevy_window 0.13.2",
+ "bevy_winit 0.13.2",
 ]
 
 [[package]]
@@ -1372,14 +1434,14 @@ dependencies = [
  "bevy_animation 0.14.1",
  "bevy_app 0.14.1",
  "bevy_asset 0.14.1",
- "bevy_audio",
+ "bevy_audio 0.14.1",
  "bevy_color",
  "bevy_core 0.14.1",
  "bevy_core_pipeline 0.14.1",
  "bevy_derive 0.14.1",
  "bevy_diagnostic 0.14.1",
  "bevy_ecs 0.14.1",
- "bevy_gilrs",
+ "bevy_gilrs 0.14.1",
  "bevy_gizmos 0.14.1",
  "bevy_gltf 0.14.1",
  "bevy_hierarchy 0.14.1",
@@ -1686,8 +1748,10 @@ dependencies = [
  "hexasphere 10.0.0",
  "image 0.24.9",
  "js-sys",
+ "ktx2",
  "naga 0.19.2",
  "naga_oil 0.13.0",
+ "ruzstd 0.5.0",
  "serde",
  "thiserror",
  "thread_local",
@@ -1734,7 +1798,7 @@ dependencies = [
  "naga 0.20.0",
  "naga_oil 0.14.0",
  "nonmax",
- "ruzstd",
+ "ruzstd 0.7.0",
  "send_wrapper",
  "serde",
  "smallvec",
@@ -3615,12 +3679,15 @@ dependencies = [
  "avian3d",
  "bevy 0.14.1",
  "bevy-inspector-egui",
+ "bevy_asepritesheet",
  "bevy_console",
  "bevy_dev_console",
  "bevy_mod_scripting",
  "bevy_scriptum",
  "bevy_tween",
  "leafwing-input-manager",
+ "leafwing_manifest",
+ "serde",
 ]
 
 [[package]]
@@ -3695,6 +3762,7 @@ dependencies = [
  "byteorder",
  "color_quant",
  "num-traits",
+ "png",
 ]
 
 [[package]]
@@ -3933,6 +4001,18 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.72",
+]
+
+[[package]]
+name = "leafwing_manifest"
+version = "0.2.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "abeebae38d8ba63b566346172972bfaa369740fb490a4d4b5770250a3809fe2e"
+dependencies = [
+ "bevy 0.14.1",
+ "bevy_common_assets",
+ "serde",
+ "thiserror",
 ]
 
 [[package]]
@@ -5288,6 +5368,16 @@ checksum = "cbf4a6aa5f6d6888f39e980649f3ad6b666acdce1d78e95b8a2cb076e687ae30"
 
 [[package]]
 name = "rodio"
+version = "0.17.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3b1bb7b48ee48471f55da122c0044fcc7600cfcc85db88240b89cb832935e611"
+dependencies = [
+ "cpal",
+ "lewton",
+]
+
+[[package]]
+name = "rodio"
 version = "0.18.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d1fceb9d127d515af1586d8d0cc601e1245bdb0af38e75c865a156290184f5b3"
@@ -5341,6 +5431,17 @@ dependencies = [
  "libc",
  "linux-raw-sys",
  "windows-sys 0.52.0",
+]
+
+[[package]]
+name = "ruzstd"
+version = "0.5.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "58c4eb8a81997cf040a091d1f7e1938aeab6749d3a0dfa73af43cdc32393483d"
+dependencies = [
+ "byteorder",
+ "derive_more",
+ "twox-hash",
 ]
 
 [[package]]
@@ -6889,6 +6990,7 @@ dependencies = [
  "android-activity 0.5.2",
  "atomic-waker",
  "bitflags 2.6.0",
+ "bytemuck",
  "calloop 0.12.4",
  "cfg_aliases 0.1.1",
  "core-foundation",
@@ -6903,6 +7005,7 @@ dependencies = [
  "objc2 0.4.1",
  "once_cell",
  "orbclient",
+ "percent-encoding",
  "raw-window-handle 0.6.2",
  "redox_syscall 0.3.5",
  "rustix",
@@ -6913,6 +7016,8 @@ dependencies = [
  "web-sys",
  "web-time 0.2.4",
  "windows-sys 0.48.0",
+ "x11-dl",
+ "x11rb",
  "xkbcommon-dl",
 ]
 
