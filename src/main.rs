@@ -1,9 +1,14 @@
 use bevy::prelude::*;
+use interpolate::scale;
 use leafwing_input_manager::prelude::*;
 use bevy_inspector_egui::quick::WorldInspectorPlugin;
 use bevy_scriptum::prelude::*;
 use bevy_scriptum::runtimes::lua::prelude::*;
 use avian3d::prelude::*;
+use bevy_tween::prelude::*;
+use bevy_tween::{
+    interpolate::translation_by
+};
 
 #[derive(Actionlike, PartialEq, Eq, Hash, Clone, Copy, Debug, Reflect)]
 enum InputAction {
@@ -14,6 +19,7 @@ enum InputAction {
 fn main() {
     App::new()
         .add_plugins(DefaultPlugins)
+        .add_plugins(DefaultTweenPlugins)
         .add_scripting::<LuaRuntime>(|runtime| {
             runtime.add_function(String::from("hello_bevy"), || {
               println!("hello bevy, called from script");
@@ -27,6 +33,7 @@ fn main() {
         .add_systems(Update, jump)
         .add_systems(Update, call_lua_on_update_from_rust)
         .add_systems(Startup, setup_avian)
+        .add_systems(Startup, setup_tweens)
         .run();
 }
 
@@ -65,6 +72,23 @@ fn call_lua_on_update_from_rust(
             .call_fn("on_update", &mut script_data, entity, ())
             .unwrap();
     }
+}
+
+fn setup_tweens(mut commands: Commands, mut meshes: ResMut<Assets<Mesh>>,
+    mut materials: ResMut<Assets<StandardMaterial>>) {
+    let mut sphere_handle = commands.spawn((
+        PbrBundle {
+            mesh: meshes.add(Sphere::new(1.0)),
+            material: materials.add(Color::WHITE),
+            ..default()
+        },
+    ));
+
+    let sphere = sphere_handle.id().into_target();
+    sphere_handle.animation().insert_tween_here(
+        Duration::from_secs(10),
+        EaseFunction::QuadraticOut,
+    sphere.with(scale(Vec3::ZERO, Vec3::ONE)));
 }
 
 fn setup_avian(

@@ -14,6 +14,7 @@ bevy_console = "0.11.1"
 bevy_dev_console = "0.0.0"
 bevy_mod_scripting = "0.6.0"
 bevy_scriptum = { version = "0.6.0", features = ["lua"] }
+bevy_tween = "0.6.0"
 leafwing-input-manager = "0.14.0"
 
 # Enable a small amount of optimization in the dev profile.
